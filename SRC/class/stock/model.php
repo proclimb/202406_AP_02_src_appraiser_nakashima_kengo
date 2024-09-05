@@ -13,9 +13,8 @@ function fnSqlStockList($flg, $param)
             break;
         case 1:
             $select  = "SELECT STOCKNO,CHARGE,RANK,DATE_FORMAT(INSDT,'%Y/%m/%d'),ARTICLE,ARTICLEFURI,ROOM,"
-                        . "IF(AREA > 0,AREA,''),STATION,DISTANCE,AGENT,STORE,COVER,IF(VISITDT > '0000-00-00',DATE_FORMAT(VISITDT,'%Y/%m/%d'),''),"
-                        . "IF(DESKPRICE > 0,DESKPRICE,''),IF(VENDORPRICE > 0,VENDORPRICE,''),NOTE"
-                    ;
+                . "IF(AREA > 0,AREA,''),STATION,DISTANCE,AGENT,STORE,COVER,IF(VISITDT > '0000-00-00',DATE_FORMAT(VISITDT,'%Y/%m/%d'),''),"
+                . "IF(DESKPRICE > 0,DESKPRICE,''),IF(VENDORPRICE > 0,VENDORPRICE,''),NOTE";
             // 並び替えとデータ抽出数
             if ($param["orderBy"]) {
                 $order = " ORDER BY " . $param["orderBy"] . " " . $param["orderTo"];
@@ -112,12 +111,11 @@ function fnSqlStockList($flg, $param)
 //
 // 仕入管理情報
 //
-function fnSqlStockEdit( $stockNo )
+function fnSqlStockEdit($stockNo)
 {
     $sql  = "SELECT CHARGE,RANK,ARTICLE,ARTICLEFURI,ROOM,IF(AREA > 0,AREA,''),STATION,DISTANCE,AGENT,STORE,COVER,"
-                . "IF(VISITDT > '0000-00-00',DATE_FORMAT(VISITDT,'%Y/%m/%d'),''),IF(DESKPRICE > 0,DESKPRICE,''),"
-                . "IF(VENDORPRICE > 0,VENDORPRICE,''),NOTE,HOW,DEL"
-            ;
+        . "IF(VISITDT > '0000-00-00',DATE_FORMAT(VISITDT,'%Y/%m/%d'),''),IF(DESKPRICE > 0,DESKPRICE,''),"
+        . "IF(VENDORPRICE > 0,VENDORPRICE,''),NOTE,HOW,DEL";
     $sql .= " FROM TBLSTOCK";
     $sql .= " WHERE STOCKNO = $stockNo";
 
@@ -156,17 +154,16 @@ function fnSqlStockUpdate($param)
 //
 // 仕入管理情報登録
 //
-function fnSqlStockInsert( $param )
+function fnSqlStockInsert($param)
 {
     $sql = "INSERT INTO TBLSTOCK(";
-    $sql .= "STOCKNO,CHARGE,RANK,ARTICLE,ARTICLEFURI,ROOM,AREA,STATION,DISTANCE,AGENT,STORE,COVER,VISITDT,DESKPRICE,VENDORPRICE,NOTE,HOW,INSDT,UPDT,DEL";
+    $sql .= "STOCKNO,CHARGE,`RANK`,ARTICLE,ARTICLEFURI,ROOM,AREA,STATION,DISTANCE,AGENT,STORE,COVER,VISITDT,DESKPRICE,VENDORPRICE,NOTE,HOW,INSDT,UPDT,DEL";
     $sql .= ")VALUES(";
     $sql .= "'" . $param["stockNo"] . "','" . $param["charge"] . "','" . $param["rank"] . "','" . $param["article"] . "','"
-                    . $param["articleFuri"] . "','" . $param["room"] . "','" . $param["area"] . "','" . $param["station"] . "','"
-                    . $param["distance"] . "','" . $param["agent"] . "','" . $param["store"] . "','" . $param["cover"] . "','"
-                    . $param["visitDT"] . "','" . $param["deskPrice"] . "','" . $param["vendorPrice"] . "','" . $param["note"] . "','"
-                    . $param["how"] . "',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'" . $param["del"] . "')"
-                ;
+        . $param["articleFuri"] . "','" . $param["room"] . "','" . $param["area"] . "','" . $param["station"] . "','"
+        . $param["distance"] . "','" . $param["agent"] . "','" . $param["store"] . "','" . $param["cover"] . "','"
+        . $param["visitDT"] . "','" . $param["deskPrice"] . "','" . $param["vendorPrice"] . "','" . $param["note"] . "','"
+        . $param["how"] . "',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'" . $param["del"] . "')";
 
     return ($sql);
 }
