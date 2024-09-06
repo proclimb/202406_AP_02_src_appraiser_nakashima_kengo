@@ -88,7 +88,7 @@ function fnNextNo($t)
 {
     $conn = fnDbConnect();
 
-    $sql = "SELECT MAX(".$t."NO) FROM TBL".$t;
+    $sql = "SELECT MAX(" . $t . "NO) FROM TBL" . $t;
     $res = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($res);
     if ($row[0]) {

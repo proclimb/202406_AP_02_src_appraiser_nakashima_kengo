@@ -129,7 +129,7 @@ function fnSqlStockUpdate($param)
 {
     $sql = "UPDATE TBLSTOCK";
     $sql .= " SET CHARGE = '" . $param["charge"] . "'";
-    $sql .= ",RANK = '" . $param["rank"] . "'";
+    $sql .= ",`RANK` = '" . $param["rank"] . "'";
     $sql .= ",ARTICLE = '" . $param["article"] . "'";
     $sql .= ",ARTICLEFURI = '" . $param["articleFuri"] . "'";
     $sql .= ",ROOM = '" . $param["room"] . "'";
