@@ -92,7 +92,7 @@ function fnNextNo($t)
     $res = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($res);
     if ($row[0]) {
-        $max = $row[0];
+        $max = $row[0] + 1;
     } else {
         $max = 1;
     }
