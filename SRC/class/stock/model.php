@@ -61,7 +61,7 @@ function fnSqlStockList($flg, $param)
         $where .= " AND AREA <= '" . $param["sAreaTo"] . "'";
     }
     if ($param["sStation"]) {
-        $where .= " AND STATION = '" . $param["sStation"] . "'";
+        $where .= " AND STATION LIKE '%" . $param["sStation"] . "%' ";
     }
     if ($param["sDistance"]) {
         $where .= " AND (";
