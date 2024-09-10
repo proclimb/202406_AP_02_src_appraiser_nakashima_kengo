@@ -3,7 +3,7 @@
 //
 function fnTradeEditCheck() {
 	tmp = form.name.value;
-	if (tmp.length < 0) {
+	if (!tmp.trim()) {
 		alert('業者名を入力してください');
 		return;
 	}
