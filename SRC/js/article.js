@@ -3,7 +3,7 @@
 //
 function fnArticleEditCheck() {
 	tmp = form.article.value;
-	if (tmp) {
+	if (!tmp) {
 		alert('物件名を入力してください');
 		return;
 	}
