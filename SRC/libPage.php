@@ -112,7 +112,7 @@ function fnOrderConstWork($n1, $n2, $a)
 	<?php
 	} else {
 	?>
-		<a href="javascript:form.act.value='<?php print $a; ?>';form.orderBy.value='<?php print $n2; ?>';form.orderTo.value='asc';form.sPage.value=1;form.submit();">▼</a>
+		<a href="javascript:form.act.value='<?php print $a; ?>';form.orderBy.value='<?php print $n2; ?>';form.orderTo.value='desc';form.sPage.value=1;form.submit();">▼</a>
 <?php
 	}
 }
