@@ -174,6 +174,7 @@ function fnSqlConstUpdate(
 	$sql .= ",CONSTFLG2 = '$constFlg2'";
 	$sql .= ",CONSTFLG3 = '$constFlg3'";
 	$sql .= ",CONSTFLG4 = '$constFlg4'";
+	$sql .= ",UPDT = CURRENT_TIMESTAMP";
 	$sql .= ",LINEOPENCONTACTDT = '$lineOpenContactDT'";
 	$sql .= ",LINECLOSECONTACTDT = '$lineCloseContactDT'";
 	$sql .= ",LINECONTACTNOTE = '$lineContactnote'";
