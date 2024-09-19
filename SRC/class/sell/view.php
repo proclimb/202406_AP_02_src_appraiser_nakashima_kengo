@@ -108,6 +108,7 @@ function subSellView($param)
 		$row = mysqli_fetch_array($res);
 
 		$count = $row[0];
+		var_dump($sql);
 
 		$sPage = fnPage($count, $param["sPage"], 'sellSearch');
 		?>
