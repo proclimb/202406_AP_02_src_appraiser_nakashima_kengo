@@ -106,7 +106,7 @@ function fnGuideMove(muki, articleNo) {
 
 		// 部屋番号の作成
 		tags += "<td>" + $(obj.children()[2]).text() + "</td>";
-		tags += "<td>" + $(obj.children()[2]).html() + "</td>";
+		//tags += "<td>" + $(obj.children()[2]).html() + "</td>";
 
 		// 鍵情報の作成
 		tags += "<td>" + $(obj.children()[3]).html() + "</td>";
