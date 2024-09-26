@@ -377,7 +377,7 @@ function subGuideChoiceView($param)
 											<td class="list_td<?php print $i ?>"><?php print $row["article"] ?></td>
 											<td class="list_td<?php print $i ?>"><?php print $row["room"] ?></td>
 											<td class="list_td<?php print $i ?>">
-												<a href="#" onclick="window.open('./index.php?act=guideShowKey&articleNo=<?php print $row["articleNo"] ?>','情報詳細','width=500,height=400');return false;">鍵詳細</a>
+												<a href="#" onclick="window.open('./index.php?act=guideShowKey&articleNo=<?php print $row['articleNo'] ?>','情報詳細','width=500,height=400');return false;">鍵詳細</a>
 											</td>
 										</tr>
 								<?php
