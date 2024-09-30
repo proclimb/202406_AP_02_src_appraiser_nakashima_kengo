@@ -40,6 +40,9 @@ require('class/title/control.php');
 // 一覧表示件数
 define("PAGE_MAX", 100);
 
+// パスワードハッシュ化、複合化
+define("PASSWORD_DEFAULT", "2y");
+
 // ログインチェック
 switch ($_REQUEST['act']) {
         // ログインチェック
