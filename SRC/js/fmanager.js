@@ -51,7 +51,8 @@ function fnFManagerViewEditCheck() {
 	}
 
 	tmp = form.pdfFile.value;
-	if (!form.pdfNo.value && tmp.slice(-4) != '.pdf' && tmp.slice(-4) != '.PDF') {
+	//if (tmp.slice(-4) != '.pdf' && tmp.slice(-4) != '.PDF') {
+	if (!tmp.toLowerCase().endsWith('.pdf')) {
 		alert('PDFファイルを指定してください');
 		return;
 	}
