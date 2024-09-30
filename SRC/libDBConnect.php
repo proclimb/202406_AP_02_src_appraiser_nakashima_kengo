@@ -74,7 +74,7 @@ function fnSqlAdminUserInsert($userNo, $name, $id, $password, $authority)
 function fnSqlAdminUserDelete($userNo)
 {
     $sql = "UPDATE TBLUSER";
-    $sql .= " SET DEL = 0";
+    $sql .= " SET DEL = -1";
     $sql .= ",UPDT = CURRENT_TIMESTAMP";
     $sql .= " WHERE USERNO = '$userNo'";
 
