@@ -443,6 +443,7 @@ function subFManagerViewEdit()
 	$sName         = htmlspecialchars($_REQUEST['sName']);
 	$sRoom         = htmlspecialchars($_REQUEST['sRoom']);
 	$sNote         = htmlspecialchars($_REQUEST['sNote']);
+	$sClassNo      = htmlspecialchars($_REQUEST['sClassNo']); // ← 追加
 
 	$orderBy = $_REQUEST['orderBy'];
 	$orderTo = $_REQUEST['orderTo'];
@@ -486,6 +487,7 @@ function subFManagerViewEdit()
 			<input type="hidden" name="fMNo" value="<?php print $fMNo; ?>" />
 			<input type="hidden" name="pdfNo" value="<?php print $pdfNo; ?>" />
 			<input type="hidden" name="docNo" value="<?php print $docNo; ?>" />
+			<input type="hidden" name="sClassNo" value="<?php print $sClassNo ?>" />
 
 			<table border="0" cellpadding="5" cellspacing="1">
 				<tr>
