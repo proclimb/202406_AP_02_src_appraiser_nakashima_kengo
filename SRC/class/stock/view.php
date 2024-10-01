@@ -335,20 +335,20 @@ function subStockEditView($param)
 					<select name="agent">
 						<option value="">----</option>
 						<?php while ($row = mysqli_fetch_assoc($res)): ?>
-							<option value="<?php echo htmlspecialchars($row['NAME']); ?>">
+							<option value="<?php echo htmlspecialchars($row['NAME']); ?>"
+								<?php echo ($row['NAME'] === $param["agent"]) ? 'selected' : ''; ?>>
 								<?php echo ($row['NAME']); ?>
 							</option>
 						<?php endwhile; ?>
 					</select>
-
 					<?php
 					//業者名の総件数
 					$sql  = fnSqlTradeSelect(0);
 					$res  = mysqli_query($param["conn"], $sql);
 					$row = mysqli_fetch_array($res);
 					$count = $row[0];
-
 					?>
+
 				</td>
 			</tr>
 			<tr>
