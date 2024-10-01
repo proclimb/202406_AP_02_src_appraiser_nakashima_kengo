@@ -110,7 +110,14 @@ function subStockEditComplete()
     $param["area"] = mysqli_real_escape_string($conn, $_REQUEST['area']);
     $param["station"] = mysqli_real_escape_string($conn, $_REQUEST['station']);
     $param["distance"] = mysqli_real_escape_string($conn, $_REQUEST['distance']);
-    $param["agent"] = mysqli_real_escape_string($conn, $_REQUEST['agent']);
+
+    //$param["agent"] = mysqli_real_escape_string($conn, $_REQUEST['agent']);
+    if ($_REQUEST['agent'] === "") {
+        $param["agent"] = null;
+    } else {
+        $param["agent"] = mysqli_real_escape_string($conn, $_REQUEST['agent']);
+    }
+
     $param["store"] = mysqli_real_escape_string($conn, $_REQUEST['store']);
     $param["cover"] = mysqli_real_escape_string($conn, $_REQUEST['cover']);
     $param["visitDT"] = mysqli_real_escape_string($conn, $_REQUEST['visitDT']);

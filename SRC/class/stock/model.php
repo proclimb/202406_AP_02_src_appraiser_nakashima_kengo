@@ -1,6 +1,24 @@
 <?php
 
 //
+// 業者名取得
+//
+function fnSqlTradeSelect($flg)
+{
+    switch ($flg) {
+        case 0:
+            $select = "SELECT COUNT(*)";
+            break;
+        case 1:
+            $select = "SELECT NAME";
+            break;
+    }
+    $from = " FROM TBLTRADE";
+    $where = " WHERE DEL = 1";
+    return $select . $from . $where;
+}
+
+//
 // 仕入管理リスト
 //
 function fnSqlStockList($flg, $param)

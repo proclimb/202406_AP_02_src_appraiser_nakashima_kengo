@@ -54,7 +54,21 @@ function subStockView($param)
 					<th>担当</th>
 					<td><input type="text" name="sCharge" value="<?php print $param["sCharge"] ?>" size="30" /></td>
 					<th>業者名</th>
-					<td><input type="text" name="sAgent" value="<?php print $param["sAgent"] ?>" size="30" /></td>
+					<td>
+						<?php
+						//機能追加　#29797
+						$sql  = fnSqlTradeSelect(1);
+						$res  = mysqli_query($param["conn"], $sql);
+						?>
+						<select name="sAgent">
+							<option value="">----</option>
+							<?php while ($row = mysqli_fetch_assoc($res)): ?>
+								<option name="sAgent" value="<?php echo htmlspecialchars($row['NAME']); ?>">
+									<?php echo ($row['NAME']); ?>
+								</option>
+							<?php endwhile; ?>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<th>ランク</th>
@@ -311,7 +325,31 @@ function subStockEditView($param)
 			</tr>
 			<tr>
 				<th>業者名</th>
-				<td><input type="text" name="agent" value="<?php print $param["agent"] ?>" /></td>
+				<td>
+					<?php
+					//業者名取得
+					$sql  = fnSqlTradeSelect(1);
+					$res  = mysqli_query($param["conn"], $sql);
+					?>
+
+					<select name="agent">
+						<option value="">----</option>
+						<?php while ($row = mysqli_fetch_assoc($res)): ?>
+							<option value="<?php echo htmlspecialchars($row['NAME']); ?>">
+								<?php echo ($row['NAME']); ?>
+							</option>
+						<?php endwhile; ?>
+					</select>
+
+					<?php
+					//業者名の総件数
+					$sql  = fnSqlTradeSelect(0);
+					$res  = mysqli_query($param["conn"], $sql);
+					$row = mysqli_fetch_array($res);
+					$count = $row[0];
+
+					?>
+				</td>
 			</tr>
 			<tr>
 				<th>店舗名</th>
