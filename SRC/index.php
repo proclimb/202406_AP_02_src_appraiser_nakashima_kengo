@@ -14,6 +14,7 @@ require('class/sell/control.php');
 
 // 仕入
 require('class/stock/control.php');
+require('libCsv.php'); //機能追加：CSV出力
 
 // 物件
 require('libArticle.php');
@@ -69,6 +70,16 @@ if ($_COOKIE['cUserNo'] != '' && $_COOKIE['authority'] != '') {
     setcookie('authority', $_COOKIE['authority'], time() - 1);
     $_REQUEST['act'] = '';
 }
+
+//　#機能追加　仕入管理CSV出力
+switch ($_REQUEST['act']) {
+    case 'stockCsv':
+        $csvno = $_POST['csvno'];
+        $csvdate = $_POST['csvdate'];
+        generateCsv($csvno, $csvdate);
+        break;
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

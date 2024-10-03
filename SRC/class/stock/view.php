@@ -56,14 +56,16 @@ function subStockView($param)
 					<th>業者名</th>
 					<td>
 						<?php
-						//機能追加　#29797
+						//機能追加　#29797 検索画面
 						$sql  = fnSqlTradeSelect(1);
 						$res  = mysqli_query($param["conn"], $sql);
 						?>
 						<select name="sAgent">
 							<option value="">----</option>
-							<?php while ($row = mysqli_fetch_assoc($res)): ?>
-								<option name="sAgent" value="<?php echo htmlspecialchars($row['NAME']); ?>">
+							<?php
+							while ($row = mysqli_fetch_assoc($res)): ?>
+								<option name="sAgent" value="<?php echo htmlspecialchars($row['NAME']); ?>"
+									<?php echo ($row['NAME'] === $param["sAgent"]) ? 'selected' : ''; ?>>
 									<?php echo ($row['NAME']); ?>
 								</option>
 							<?php endwhile; ?>
@@ -142,7 +144,23 @@ function subStockView($param)
 		$param["$sPage"] = fnPage($count, $param["sPage"], 'stockSearch');
 		?>
 
-		<div class="list">
+		<?php //機能追加：CSV出力
+		$sql  = fnSqlStockList(1, $param);
+		$res  = mysqli_query($param["conn"], $sql);
+
+		while ($row = mysqli_fetch_array($res)) {
+			$stockNos[] = htmlspecialchars($row[0]);
+		}
+		$stockNosText = implode(",", $stockNos);
+		//print_r($stockNos);
+		?>
+		<input type="hidden" name="csvno" value=<?php echo $count ?> />
+		<input type="hidden" name="csvdate" value=<?php echo $stockNosText ?> />
+		<input type="image" src="./images/btn_csv.png" onclick="form.act.value='stockCsv'; " />
+		<?php //<input type="image" src="./images/btn_csv.png" onclick="form.act.value='stockSearch'; form.sPage.value=1; form.submit();" />
+		?>
+
+		<div class=" list">
 			<table border="0" cellpadding="5" cellspacing="1">
 				<tr>
 					<th class="list_head">担当<?php fnOrder('CHARGE', 'stockSearch') ?></th>
