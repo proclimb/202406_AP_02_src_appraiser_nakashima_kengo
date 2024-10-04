@@ -15,6 +15,9 @@ require('class/sell/control.php');
 // 店舗
 require('class/store/control.php');
 
+// 店舗担当者
+require('class/cover/control.php');
+
 // 仕入
 require('class/stock/control.php');
 require('libCsv.php'); //機能追加：CSV出力
@@ -125,6 +128,15 @@ switch ($_REQUEST['act']) {
 
         case 'adminUserDelete':
             subAdminUserDelete();
+            break;
+
+            //店舗担当者
+        case 'cover':
+        case 'coverSearch':
+        case 'coverEdit':
+        case 'coverEditComplete':
+        case 'coverDelete':
+            cover_control();
             break;
 
             //店舗管理

@@ -20,6 +20,7 @@ function subMenu()
 				<div id="navi6"><a href="javascript:menu.act.value='sell';menu.submit();"><img src="./images/navi6.png"></a></div>
 				<div id="navi7"><a href="javascript:menu.act.value='fManager';menu.submit();"><img src="./images/navi7.png"></a></div>
 				<div id="navi11"><a href="javascript:menu.act.value='store';menu.submit();"><img src="./images/navi11.png"></a></div>
+				<div id="navi12"><a href="javascript:menu.act.value='cover';menu.submit();"><img src="./images/navi12.png"></a></div>
 				<?php if ($_COOKIE['authority'] == 0) { ?>
 					<div id="navi10"><a href="javascript:menu.act.value='fTitle';menu.submit();"><img src="./images/navi10.png"></a></div>
 					<div id="navi8"><a href="javascript:menu.act.value='adminUser';menu.submit();"><img src="./images/navi8.png"></a></div>

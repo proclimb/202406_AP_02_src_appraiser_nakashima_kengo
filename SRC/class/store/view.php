@@ -21,7 +21,7 @@ function subStoreView($param)
             <table border="0" cellpadding="2" cellSpacing="0">
                 <tr>
                     <th>店舗名</th>
-                    <td colspan="6"><input type="text" name="sStore" value="<?php print $param["sStore"] ?>" size="60" /></td>
+                    <td colspan="6"><input type="text" name="sStore" value="<?php print $param["sStore"] ?>" size="30" /></td>
                 </tr>
 
             </table>

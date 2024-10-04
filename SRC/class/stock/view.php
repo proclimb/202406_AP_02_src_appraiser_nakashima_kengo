@@ -157,7 +157,7 @@ function subStockView($param)
 
 		$count = $row[0];
 
-		$param["$sPage"] = fnPage($count, $param["sPage"], 'stockSearch');
+		$sPage = fnPage($count, $param["sPage"], 'stockSearch');
 		?>
 
 		<?php //機能追加：CSV出力
