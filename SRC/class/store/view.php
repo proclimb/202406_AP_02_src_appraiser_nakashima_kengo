@@ -1,12 +1,12 @@
 <?php
 //
-//店舗一覧画面
+//店舗管理一覧画面
 //
 function subStoreView($param)
 {
 ?>
     <script type="text/javascript" src="./js/store.js"></script>
-    <h1>店舗一覧</h1>
+    <h1>店舗管理一覧</h1>
 
     <form name="form" id="form" action="index.php" method="post">
         <input type="hidden" name="act" value="storeSearch" />

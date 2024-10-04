@@ -86,7 +86,23 @@ function subStockView($param)
 						?>
 					</td>
 					<th>店舗名</th>
-					<td><input type="text" name="sStore" value="<?php print $param["sStore"] ?>" size="30" /></td>
+					<td>
+						<?php
+						//機能追加　#29917 検索画面
+						$sql  = fnSqlStoreSelect(1);
+						$res  = mysqli_query($param["conn"], $sql);
+						?>
+						<select name="sStore">
+							<option value="">----</option>
+							<?php
+							while ($row = mysqli_fetch_array($res)): ?>
+								<option name="sStore" value="<?php echo htmlspecialchars($row[0]); ?>"
+									<?php echo ($row[0] === $param["sStore"]) ? 'selected' : ''; ?>>
+									<?php echo ($row[0]); ?>
+								</option>
+							<?php endwhile; ?>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<th>物件名</th>
@@ -371,7 +387,30 @@ function subStockEditView($param)
 			</tr>
 			<tr>
 				<th>店舗名</th>
-				<td><input type="text" name="store" value="<?php print $param["store"] ?>" /></td>
+				<td>
+					<?php
+					//店舗名取得
+					$sql  = fnSqlStoreSelect(1);
+					$res  = mysqli_query($param["conn"], $sql);
+					?>
+
+					<select name="store">
+						<option value="">----</option>
+						<?php while ($row = mysqli_fetch_array($res)): ?>
+							<option value="<?php echo htmlspecialchars($row[0]); ?>"
+								<?php echo ($row[0] === $param["store"]) ? 'selected' : ''; ?>>
+								<?php echo ($row[0]); ?>
+							</option>
+						<?php endwhile; ?>
+					</select>
+					<?php
+					//店舗の総件数
+					$sql  = fnSqlStoreSelect(0);
+					$res  = mysqli_query($param["conn"], $sql);
+					$row = mysqli_fetch_array($res);
+					$count = $row[0];
+					?>
+				</td>
 			</tr>
 			<tr>
 				<th>担当者名</th>

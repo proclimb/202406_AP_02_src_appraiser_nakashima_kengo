@@ -19,6 +19,24 @@ function fnSqlTradeSelect($flg)
 }
 
 //
+// 店舗名取得
+//
+function fnSqlStoreSelect($flg)
+{
+    switch ($flg) {
+        case 0:
+            $select = "SELECT COUNT(*)";
+            break;
+        case 1:
+            $select = "SELECT STORE";
+            break;
+    }
+    $from = " FROM TBLSTORE";
+    $where = " WHERE DEL = 1";
+    return $select . $from . $where;
+}
+
+//
 // 仕入管理リスト
 //
 function fnSqlStockList($flg, $param)

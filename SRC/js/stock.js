@@ -43,17 +43,20 @@ function fnStockEditCheck() {
 		return;
 	}
 	/*
-		tmp = form.agent.value;
-		if (tmp.length > 100) {
-			alert('業者名は100文字以内で入力してください');
-			return;
-		}
-	*/
+
+	tmp = form.agent.value;
+	if (tmp.length > 100) {
+		alert('業者名は100文字以内で入力してください');
+		return;
+	}
+
 	tmp = form.store.value;
 	if (tmp.length > 100) {
 		alert('店舗名は100文字以内で入力してください');
 		return;
 	}
+
+	*/
 
 	tmp = form.cover.value;
 	if (tmp.length > 100) {
