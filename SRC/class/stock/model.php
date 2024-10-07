@@ -37,6 +37,18 @@ function fnSqlStoreSelect($flg)
 }
 
 //
+// 担当者取得
+//
+
+function fnSqlCoverSelectByStore($selectedStore)
+{
+    $select = "SELECT COVER";
+    $from = " FROM TBLCOVER";
+    $where = " WHERE DEL = 1 AND STORE = '$selectedStore'";
+    return $select . $from . $where;
+}
+
+//
 // 仕入管理リスト
 //
 function fnSqlStockList($flg, $param)

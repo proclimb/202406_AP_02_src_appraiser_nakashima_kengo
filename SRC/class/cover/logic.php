@@ -16,7 +16,7 @@ function subCover()
     }
 
     if (! $param["orderBy"]) {
-        //$param["orderBy"] = 'SEARCHDT';
+        $param["orderBy"] = 'COVERNO';
         $param["orderTo"] = 'desc';
     }
 
@@ -67,6 +67,7 @@ function subCoverEditComplete()
 
     if ($param["coverNo"]) {
         $sql = fnSqlCoverUpdate($param);
+        var_dump($sql);
         $res = mysqli_query($param["conn"], $sql);
     } else {
         $param["coverNo"] = fnNextNo('COVER');
@@ -110,6 +111,7 @@ function getCoverParam()
     $param["sCover"] = htmlspecialchars($_REQUEST['sCover']);
     $param["sMobile"] = htmlspecialchars($_REQUEST['sMobile']);
 
+    $param["orderBy"] = $_REQUEST['orderBy'];
     $param["orderTo"] = $_REQUEST['orderTo'];
     $param["sPage"] = $_REQUEST['sPage'];
 

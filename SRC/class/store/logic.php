@@ -16,7 +16,7 @@ function subStore()
     }
 
     if (! $param["orderBy"]) {
-        //$param["orderBy"] = 'SEARCHDT';
+        $param["orderBy"] = 'STORENO';
         $param["orderTo"] = 'desc';
     }
 
@@ -104,6 +104,7 @@ function getStoreParam()
     // 検索情報
     $param["sStore"] = htmlspecialchars($_REQUEST['sStore']);
 
+    $param["orderBy"] = $_REQUEST['orderBy'];
     $param["orderTo"] = $_REQUEST['orderTo'];
     $param["sPage"] = $_REQUEST['sPage'];
 

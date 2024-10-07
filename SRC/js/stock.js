@@ -56,13 +56,13 @@ function fnStockEditCheck() {
 		return;
 	}
 
-	*/
-
 	tmp = form.cover.value;
 	if (tmp.length > 100) {
 		alert('担当者は100文字以内で入力してください');
 		return;
 	}
+
+	*/
 
 	if (!fnYMDCheck("正しい内見日付", form.visitDT)) { return; }
 

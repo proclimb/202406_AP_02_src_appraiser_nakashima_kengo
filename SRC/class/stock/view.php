@@ -91,16 +91,18 @@ function subStockView($param)
 						//機能追加　#29917 検索画面
 						$sql  = fnSqlStoreSelect(1);
 						$res  = mysqli_query($param["conn"], $sql);
+						$stores = [];
+						while ($row = mysqli_fetch_array($res)) {
+							$stores[] = htmlspecialchars($row[0]);  //店舗名を配列に保存
+						}
 						?>
-						<select name="sStore">
+						<select name="sStore" id="storeSelect">
 							<option value="">----</option>
-							<?php
-							while ($row = mysqli_fetch_array($res)): ?>
-								<option name="sStore" value="<?php echo htmlspecialchars($row[0]); ?>"
-									<?php echo ($row[0] === $param["sStore"]) ? 'selected' : ''; ?>>
-									<?php echo ($row[0]); ?>
-								</option>
-							<?php endwhile; ?>
+							<?php foreach ($stores as $store): ?>
+								<option value="<?php echo $store; ?>"
+									<?php echo ($store === $param["sStore"]) ? 'selected' : ''; ?>>
+									<?php echo $store; ?></option>
+							<?php endforeach; ?>
 						</select>
 					</td>
 				</tr>
@@ -108,7 +110,58 @@ function subStockView($param)
 					<th>物件名</th>
 					<td><input type="text" name="sArticle" value="<?php print $param["sArticle"] ?>" size="50" /></td>
 					<th>担当者名</th>
-					<td><input type="text" name="sCover" value="<?php print $param["sCover"] ?>" size="30" /></td>
+					<td>
+						<select name="sCover" id="coverSelect" <?php echo !isset($_POST['sStore']) || $_POST['sStore'] === '' ? 'disabled' : ''; ?>>
+							<option value="">----</option>
+							<?php
+							// 現在選択されている担当者名
+							$selectedCover = isset($_POST['sCover']) ? htmlspecialchars($_POST['sCover']) : '';
+
+							// 店舗名に対応する担当者名のマッピング
+							$covers = [];
+							foreach ($stores as $store) {
+								$sql = fnSqlCoverSelectByStore($store); // 店舗名に基づく担当者名取得のSQL関数
+								$res = mysqli_query($param["conn"], $sql);
+								while ($row = mysqli_fetch_array($res)) {
+									$cover = htmlspecialchars($row[0]);
+									$covers[$store][] = $cover; // 店舗ごとの担当者名を保存
+								}
+							}
+
+							// 店舗名が選択されたときの処理
+							echo '<script>';
+							echo 'const covers = ' . json_encode($covers) . ';'; // JSON形式でクライアントに渡す
+							echo 'document.getElementById("storeSelect").addEventListener("change", function() {';
+							echo 'const store = this.value;';
+							echo 'const coverSelect = document.getElementById("coverSelect");';
+							echo 'coverSelect.innerHTML = \'<option value="">----</option>\';'; // 初期化
+
+							echo 'if (covers[store]) {';
+							echo 'covers[store].forEach(function(cover) {';
+							echo 'const option = document.createElement("option");';
+							echo 'option.value = cover;';
+							echo 'option.textContent = cover;';
+							echo 'coverSelect.appendChild(option);';
+							echo '});';
+							echo 'coverSelect.disabled = false;'; // 店舗名が選択された場合は有効化
+							echo '} else {';
+							echo 'coverSelect.disabled = true;'; // 店舗名が選択されていない場合は無効化
+							echo '}';
+							echo '});';
+							echo '</script>';
+
+							// 初期値として選択されている担当者名を設定
+							foreach ($covers as $store => $coverList) {
+								if ($store === $param["sStore"]) {
+									foreach ($coverList as $cover) {
+										$selected = ($cover === $selectedCover) ? 'selected' : '';
+										echo "<option value=\"$cover\" $selected>$cover</option>";
+									}
+								}
+							}
+							?>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<th>物件名（よみ）</th>
@@ -389,32 +442,81 @@ function subStockEditView($param)
 				<th>店舗名</th>
 				<td>
 					<?php
-					//店舗名取得
+					//機能追加　#29917 検索画面
 					$sql  = fnSqlStoreSelect(1);
 					$res  = mysqli_query($param["conn"], $sql);
+					$stores = [];
+					while ($row = mysqli_fetch_array($res)) {
+						$stores[] = htmlspecialchars($row[0]);  //店舗名を配列に保存
+					}
 					?>
-
-					<select name="store">
+					<select name="store" id="storeSelect">
 						<option value="">----</option>
-						<?php while ($row = mysqli_fetch_array($res)): ?>
-							<option value="<?php echo htmlspecialchars($row[0]); ?>"
-								<?php echo ($row[0] === $param["store"]) ? 'selected' : ''; ?>>
-								<?php echo ($row[0]); ?>
-							</option>
-						<?php endwhile; ?>
+						<?php foreach ($stores as $store): ?>
+							<option value="<?php echo $store; ?>"
+								<?php echo ($store === $param["store"]) ? 'selected' : ''; ?>>
+								<?php echo $store; ?></option>
+						<?php endforeach; ?>
 					</select>
-					<?php
-					//店舗の総件数
-					$sql  = fnSqlStoreSelect(0);
-					$res  = mysqli_query($param["conn"], $sql);
-					$row = mysqli_fetch_array($res);
-					$count = $row[0];
-					?>
 				</td>
 			</tr>
 			<tr>
 				<th>担当者名</th>
-				<td><input type="text" name="cover" value="<?php print $param["cover"] ?>" /></td>
+				<td>
+					<select name="cover" id="coverSelect" <?php echo !isset($param["store"]) || $param["store"] === '' ? 'disabled' : ''; ?>>
+						<option value="">----</option>
+						<?php
+						// 店舗名が選択されている場合、その店舗の担当者名を表示
+						if (isset($param["store"]) && $param["store"] !== '') {
+							$sql = fnSqlCoverSelectByStore($param["store"]); // 店舗名に基づく担当者名取得のSQL関数
+							$res = mysqli_query($param["conn"], $sql);
+
+							while ($row = mysqli_fetch_array($res)) {
+								$cover = htmlspecialchars($row[0]);
+								$selected = ($cover === (isset($param["cover"]) ? $param["cover"] : '')) ? 'selected' : '';
+								echo "<option value=\"$cover\" $selected>$cover</option>";
+							}
+						}
+						?>
+					</select>
+				</td>
+			</tr>
+
+			<script>
+				// 店舗名に対応する担当者名のマッピング
+				const covers = <?php
+								$coversArray = [];
+								foreach ($stores as $store) {
+									$sql = fnSqlCoverSelectByStore($store);
+									$res = mysqli_query($param["conn"], $sql);
+									$coversArray[$store] = [];
+									while ($row = mysqli_fetch_array($res)) {
+										$coversArray[$store][] = htmlspecialchars($row[0]);
+									}
+								}
+								echo json_encode($coversArray);
+								?>;
+
+				// 店舗名が選択されたときの処理
+				document.getElementById('storeSelect').addEventListener('change', function() {
+					const store = this.value;
+					const coverSelect = document.getElementById('coverSelect');
+					coverSelect.innerHTML = '<option value="">----</option>'; // 初期化
+
+					if (covers[store]) {
+						covers[store].forEach(function(cover) {
+							const option = document.createElement('option');
+							option.value = cover;
+							option.textContent = cover;
+							coverSelect.appendChild(option);
+						});
+						coverSelect.disabled = false; // 店舗名が選択された場合は有効化
+					} else {
+						coverSelect.disabled = true; // 店舗名が選択されていない場合は無効化
+					}
+				});
+			</script>
+			</td>
 			</tr>
 			<tr>
 				<th>内見</th>

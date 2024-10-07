@@ -125,7 +125,13 @@ function subStockEditComplete()
         $param["store"] = mysqli_real_escape_string($conn, $_REQUEST['store']);
     }
 
-    $param["cover"] = mysqli_real_escape_string($conn, $_REQUEST['cover']);
+    //$param["cover"] = mysqli_real_escape_string($conn, $_REQUEST['cover']);
+    if ($_REQUEST['cover'] === "") {
+        $param["cover"] = null;
+    } else {
+        $param["cover"] = mysqli_real_escape_string($conn, $_REQUEST['cover']);
+    }
+
     $param["visitDT"] = mysqli_real_escape_string($conn, $_REQUEST['visitDT']);
     $param["deskPrice"] = mysqli_real_escape_string($conn, $_REQUEST['deskPrice']);
     $param["vendorPrice"] = mysqli_real_escape_string($conn, $_REQUEST['vendorPrice']);

@@ -57,8 +57,8 @@ function fnSqlCoverUpdate($param)
 {
     $sql = "UPDATE TBLCOVER";
     $sql .= " SET STORE = '" . $param["store"] . "'";
-    $sql .= " COVER = '" . $param["cover"] . "'";
-    $sql .= " MOBILE = '" . $param["mobile"] . "'";
+    $sql .= " ,COVER = '" . $param["cover"] . "'";
+    $sql .= " ,MOBILE = '" . $param["mobile"] . "'";
     $sql .= ",UPDT = CURRENT_TIMESTAMP";
     $sql .= " WHERE COVERNO = " . $param["coverNo"];
 
