@@ -129,27 +129,28 @@ function subStockView($param)
 							}
 
 							// 店舗名が選択されたときの処理
-							echo '<script>';
-							echo 'const covers = ' . json_encode($covers) . ';'; // JSON形式でクライアントに渡す
-							echo 'document.getElementById("storeSelect").addEventListener("change", function() {';
-							echo 'const store = this.value;';
-							echo 'const coverSelect = document.getElementById("coverSelect");';
-							echo 'coverSelect.innerHTML = \'<option value="">----</option>\';'; // 初期化
+							?>
+							<script>
+								const covers = <?php echo json_encode($covers); ?>; // JSON形式でクライアントに渡す
+								document.getElementById("storeSelect").addEventListener("change", function() {
+									const store = this.value;
+									const coverSelect = document.getElementById("coverSelect");
+									coverSelect.innerHTML = "<option value=''>-----</option>"; // 初期化
+									if (covers[store]) {
+										covers[store].forEach(function(cover) {
+											const option = document.createElement("option");
+											option.value = cover;
+											option.textContent = cover;
+											coverSelect.appendChild(option);
+										});
+										coverSelect.disabled = false; // 店舗名が選択された場合は有効化
+									} else {
+										coverSelect.disabled = true; // 店舗名が選択されていない場合は無効化
+									}
+								});
+							</script>
 
-							echo 'if (covers[store]) {';
-							echo 'covers[store].forEach(function(cover) {';
-							echo 'const option = document.createElement("option");';
-							echo 'option.value = cover;';
-							echo 'option.textContent = cover;';
-							echo 'coverSelect.appendChild(option);';
-							echo '});';
-							echo 'coverSelect.disabled = false;'; // 店舗名が選択された場合は有効化
-							echo '} else {';
-							echo 'coverSelect.disabled = true;'; // 店舗名が選択されていない場合は無効化
-							echo '}';
-							echo '});';
-							echo '</script>';
-
+							<?php
 							// 初期値として選択されている担当者名を設定
 							foreach ($covers as $store => $coverList) {
 								if ($store === $param["sStore"]) {
