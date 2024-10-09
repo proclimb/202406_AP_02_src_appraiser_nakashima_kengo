@@ -88,7 +88,6 @@ function subStockView($param)
 					<th>店舗名</th>
 					<td>
 						<?php
-						//機能追加　#29917 検索画面
 						$sql  = fnSqlStoreSelect(1);
 						$res  = mysqli_query($param["conn"], $sql);
 						$stores = [];
@@ -96,11 +95,11 @@ function subStockView($param)
 							$stores[] = htmlspecialchars($row[0]);  //店舗名を配列に保存
 						}
 						?>
-						<select name="sStore" id="storeSelect">
+						<select name="store" id="storeSelect">
 							<option value="">----</option>
 							<?php foreach ($stores as $store): ?>
 								<option value="<?php echo $store; ?>"
-									<?php echo ($store === $param["sStore"]) ? 'selected' : ''; ?>>
+									<?php echo ($store === $param["store"]) ? 'selected' : ''; ?>>
 									<?php echo $store; ?></option>
 							<?php endforeach; ?>
 						</select>
@@ -443,7 +442,6 @@ function subStockEditView($param)
 				<th>店舗名</th>
 				<td>
 					<?php
-					//機能追加　#29917 検索画面
 					$sql  = fnSqlStoreSelect(1);
 					$res  = mysqli_query($param["conn"], $sql);
 					$stores = [];
