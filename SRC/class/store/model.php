@@ -3,6 +3,15 @@
 //
 // 店舗リスト
 //
+function fnSqlStoreSelectByArea($selectedArea)
+{
+    $sql = "SELECT STORE FROM TBLSTORE WHERE AREA = '$selectedArea' AND DEL = 1";
+    return $sql;
+}
+
+//
+// 店舗リスト
+//
 function fnSqlStoreList($flg, $param)
 {
     switch ($flg) {
@@ -12,7 +21,7 @@ function fnSqlStoreList($flg, $param)
             $limit = "";
             break;
         case 1:
-            $select = "SELECT STORENO, STORE";
+            $select = "SELECT STORENO, STORE, AREA, NOTE";
             // 並び替えとデータ抽出数
             if ($param["orderBy"]) {
                 $order = " ORDER BY " . $param["orderBy"] . " " . $param["orderTo"];
@@ -27,6 +36,12 @@ function fnSqlStoreList($flg, $param)
     if ($param["sStore"]) {
         $where .= " AND STORE LIKE '%" . $param["sStore"] . "%'";
     }
+    if ($param["sArea"]) {
+        $where .= " AND AREA LIKE '%" . $param["sArea"] . "%'";
+    }
+    if ($param["sNote"]) {
+        $where .= " AND NOTE LIKE '%" . $param["sNote"] . "%'";
+    }
 
     return $select . $from . $where . $order . $limit;
 }
@@ -36,7 +51,7 @@ function fnSqlStoreList($flg, $param)
 //
 function fnSqlStoreEdit($storeNo)
 {
-    $select  = "SELECT STORE";
+    $select  = "SELECT STORE, AREA, NOTE";
     $from = " FROM TBLSTORE";
     $where = " WHERE DEL = 1";
     $where .= " AND STORENO = $storeNo";
@@ -51,6 +66,8 @@ function fnSqlStoreUpdate($param)
 {
     $sql = "UPDATE TBLSTORE";
     $sql .= " SET STORE = '" . $param["store"] . "'";
+    $sql .= ", AREA = '" . $param["area"] . "'";
+    $sql .= ", NOTE = '" . $param["note"] . "'";
     $sql .= ",UPDT = CURRENT_TIMESTAMP";
     $sql .= " WHERE STORENO = " . $param["storeNo"];
 
@@ -63,9 +80,10 @@ function fnSqlStoreUpdate($param)
 function fnSqlStoreInsert($param)
 {
     $sql = "INSERT INTO TBLSTORE(";
-    $sql .= "STORENO,STORE,INSDT,UPDT,DEL";
+    $sql .= "STORENO,STORE,AREA,NOTE,INSDT,UPDT,DEL";
     $sql .= ")VALUES(";
-    $sql .= "'" . $param["storeNo"] . "','" . $param["store"] . "',"
+    $sql .= "'" . $param["storeNo"] . "','" . $param["store"] . "','"
+        . $param["area"] . "'," . $param["note"] . "',"
         . "CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1)";
 
     return $sql;

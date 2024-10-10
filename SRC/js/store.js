@@ -12,6 +12,12 @@ function fnStoreEditCheck() {
         return;
     }
 
+    tmp = form.area.value;
+    if (!tmp.trim()) {
+        alert('エリアを選択してください');
+        return;
+    }
+
     if (confirm('この内容で登録します。よろしいですか？')) {
         form.act.value = 'storeEditComplete';
         form.submit();

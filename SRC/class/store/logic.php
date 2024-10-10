@@ -39,12 +39,21 @@ function subStoreEdit()
         $row = mysqli_fetch_array($res);
 
         $param["store"] = htmlspecialchars($row[0]);
+        $param["area"] = htmlspecialchars($row[1]);
+        $param["note"] = htmlspecialchars($row[2]);
 
         $param["purpose"] = '更新';
         $param["btnImage"] = 'btn_load.png';
     } else {
         $param["purpose"] = '登録';
         $param["btnImage"] = 'btn_enter.png';
+    }
+
+    if ($_REQUEST['area']) {
+
+        $param["store"]        = htmlspecialchars($_REQUEST['store']);
+        $param["area"]          = htmlspecialchars($_REQUEST['area']);
+        $param["note"]       = htmlspecialchars($_REQUEST['note']);
     }
 
     subMenu();
@@ -58,11 +67,15 @@ function subStoreEditComplete()
 {
     $param = getStoreParam();
 
+    // 登録・更新画面から受け取った値を$param配列に格納し、SQLインジェクション対策としてエスケープ処理を行う
     $param["storeNo"] = mysqli_real_escape_string($param["conn"], $_REQUEST['storeNo']);
     $param["store"] = mysqli_real_escape_string($param["conn"], $_REQUEST['store']);
+    $param["area"] = mysqli_real_escape_string($param["conn"], $_REQUEST['area']);
+    $param["note"] = mysqli_real_escape_string($param["conn"], $_REQUEST['note']);
 
     if ($param["storeNo"]) {
         $sql = fnSqlStoreUpdate($param);
+        var_dump($sql);
         $res = mysqli_query($param["conn"], $sql);
     } else {
         $param["storeNo"] = fnNextNo('STORE');
@@ -103,6 +116,8 @@ function getStoreParam()
 
     // 検索情報
     $param["sStore"] = htmlspecialchars($_REQUEST['sStore']);
+    $param["sArea"] = htmlspecialchars($_REQUEST['sArea']);
+    $param["sNote"] = htmlspecialchars($_REQUEST['sNote']);
 
     $param["orderBy"] = $_REQUEST['orderBy'];
     $param["orderTo"] = $_REQUEST['orderTo'];

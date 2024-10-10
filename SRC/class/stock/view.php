@@ -95,11 +95,11 @@ function subStockView($param)
 							$stores[] = htmlspecialchars($row[0]);  //店舗名を配列に保存
 						}
 						?>
-						<select name="store" id="storeSelect">
+						<select name="sStore" id="storeSelect">
 							<option value="">----</option>
 							<?php foreach ($stores as $store): ?>
 								<option value="<?php echo $store; ?>"
-									<?php echo ($store === $param["store"]) ? 'selected' : ''; ?>>
+									<?php echo ($store === $param["sStore"]) ? 'selected' : ''; ?>>
 									<?php echo $store; ?></option>
 							<?php endforeach; ?>
 						</select>
