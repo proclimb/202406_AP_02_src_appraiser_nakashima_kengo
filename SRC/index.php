@@ -154,6 +154,9 @@ switch ($_REQUEST['act']) {
         case 'sellEdit':
         case 'sellEditComplete':
         case 'sellDelete':
+
+        case 'sellCsv':
+        case 'sellCsvEdit':
             sell_control();
             break;
 

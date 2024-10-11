@@ -1,13 +1,13 @@
 <?php
-require ('class/sell/logic.php');
-require ('class/sell/model.php');
-require ('class/sell/view.php');
+require('class/sell/logic.php');
+require('class/sell/model.php');
+require('class/sell/view.php');
 
 function sell_control()
 {
     switch ($_REQUEST['act']) {
 
-        // 売主物件
+            // 売主物件
         case 'sell':
         case 'sellSearch':
             subSell();
@@ -23,6 +23,15 @@ function sell_control()
 
         case 'sellDelete':
             subSellDelete();
+            break;
+
+            //機能追加：CSV一括
+        case 'sellCsv':
+            subSellCsv();
+            break;
+
+        case 'sellCsvEdit':
+            subSellCsvEdit();
             break;
     }
 }

@@ -144,3 +144,18 @@ function fnSqlSellDelete($sellNo)
 
     return $sql;
 }
+
+//
+// CSV一括登録
+//
+function fnSqlSellCsvInsert($param)
+{
+    $sql = "INSERT INTO TBLSELL(";
+    $sql .= "SELLNO,SEARCHDT,ARTICLE,ADDRESS,STATION,FOOT,YEARS,FLOOR,AREA,SELLER,PRICE,NOTE,INSDT,UPDT,DEL";
+    $sql .= ")VALUES(";
+    $sql .= "'" . $param["sellNo"] . "','" . $param["searchDT"] . "','" . $param["article"] . "','" . $param["address"] . "',"
+        . "'" . $param["station"] . "','" . $param["foot"] . "','" . $param["years"] . "','" . $param["floor"] . "',"
+        . "'" . $param["area"] . "','" . $param["seller"] . "','" . $param["price"] . "','" . $param["note"] . "',"
+        . "CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1)";
+    return $sql;
+}

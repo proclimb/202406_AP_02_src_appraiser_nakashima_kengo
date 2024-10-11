@@ -19,7 +19,10 @@ function subSellView($param)
 		<input type="hidden" name="sPage" value="<?php print $param["sPage"] ?>" />
 		<input type="hidden" name="sellNo" />
 
-		<a href="javascript:form.act.value='sellEdit';form.submit();"><img src="./images/btn_enter.png"></a>
+		<div style="display: flex;">
+			<a href="javascript:form.act.value='sellEdit';form.submit();"><img src="./images/btn_enter.png"></a>
+			<a href="javascript:form.act.value='sellCsv';form.submit();" style="margin: 20px;">CSV一括登録</a>
+		</div>
 
 		<div class="search">
 			<table border="0" cellpadding="2" cellSpacing="0">
@@ -263,10 +266,57 @@ function subSellEditView($param)
 			</tr>
 		</table>
 
-		<a href="javascript:fnSellEditCheck();"><img src="./images/<?php print $param["btnImage"] ?>" /></a>　<a href="javascript:form.act.value='sellSearch';form.submit();"><img src="./images/btn_return.png" /></a>
-
+		<a href="javascript:fnSellEditCheck();"><img src="./images/<?php print $param["btnImage"] ?>" /></a>
+		<a href="javascript:form.act.value='sellSearch';form.submit();"><img src="./images/btn_return.png" /></a>
 	</form>
+<?php
+}
 
+//
+// 売主一括登録画面
+//
+function subSellCsvView($param)
+{
+?>
+	<h1>売主一括登録</h1>
+
+	<form name="form" id="form" enctype="multipart/form-data" action="index.php" method="post">
+		<input type="hidden" name="act" />
+		<input type="hidden" name="sSearchFrom" value="<?php print $param["sSearchFrom"] ?>" />
+		<input type="hidden" name="sSearchTo" value="<?php print $param["sSearchTo"] ?>" />
+		<input type="hidden" name="sArticle" value="<?php print $param["sArticle"] ?>" />
+		<input type="hidden" name="sAddress" value="<?php print $param["sAddress"] ?>" />
+		<input type="hidden" name="sStation" value="<?php print $param["sStation"] ?>" />
+		<input type="hidden" name="sFoot" value="<?php print $param["sFoot"] ?>" />
+		<input type="hidden" name="sFootC" value="<?php print $param["sFootC"] ?>" />
+		<input type="hidden" name="sAreaFrom" value="<?php print $param["sAreaFrom"] ?>" />
+		<input type="hidden" name="sAreaTo" value="<?php print $param["sAreaTo"] ?>" />
+		<input type="hidden" name="sYearsFrom" value="<?php print $param["sYearsFrom"] ?>" />
+		<input type="hidden" name="sYearsTo" value="<?php print $param["sYearsTo"] ?>" />
+		<input type="hidden" name="sPriceFrom" value="<?php print $param["sPriceFrom"] ?>" />
+		<input type="hidden" name="sPriceTo" value="<?php print $param["sPriceTo"] ?>" />
+		<input type="hidden" name="sSeller" value="<?php print $param["sSeller"] ?>" />
+		<input type="hidden" name="orderBy" value="<?php print $param["orderBy"] ?>" />
+		<input type="hidden" name="orderTo" value="<?php print $param["orderTo"] ?>" />
+		<input type="hidden" name="sPage" value="<?php print $param["sPage"] ?>" />
+		<input type="hidden" name="sellNo" value="<?php print $param["sellNo"] ?>" />
+
+		<div class="search">
+			<table border="0" cellpadding="2" cellSpacing="0">
+				<tr>
+					<th>売主物件CSV：</th>
+					<td><input type="file" accept=".csv" name="userFile" required /></td>
+				</tr>
+			</table>
+		</div>
+
+		<div style="display: flex; margin-top:10px;">
+			<a href="javascript:form.act.value='sellCsvEdit';form.submit();" style="margin: 20px;">CSV一括登録</a>
+			<a href="javascript:form.act.value='sellSearch';form.submit();"><img src="./images/btn_return.png" /></a>
+		</div>
+
+		<hr />
+	</form>
 <?php
 }
 ?>
