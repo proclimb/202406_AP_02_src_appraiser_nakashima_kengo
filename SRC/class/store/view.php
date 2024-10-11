@@ -28,7 +28,7 @@ function subStoreView($param)
                             $areaList = ['東京', '埼玉', '群馬', '栃木', '茨城', '千葉', '神奈川'];
                             foreach ($areaList as $area):
                             ?>
-                                <option value="<?php echo $area; ?>" <?php echo ($param["sArea"] === $area) ? 'selected' : ''; ?>>
+                                <option value="<?php print $area; ?>" <?php echo ($param["sArea"] === $area) ? 'selected' : ''; ?>>
                                     <?php echo $area; ?></option>
                             <?php endforeach ?>
                         </select>
@@ -37,26 +37,24 @@ function subStoreView($param)
                 <tr>
                     <th>店舗名</th>
                     <td>
-                        <select name="sStore" value="<?php print $param["sStore"] ?>">
+                        <select name="sStore" <?php print $param['sArea'] === '' ? 'disabled' : ''; ?>>
                             <option value="">-----</option>
                             <?php
                             $selectedArea = $param["sArea"];
                             $sql = fnSqlStoreSelectByArea($selectedArea);
                             $res = mysqli_query($param["conn"], $sql);
                             if (isset($param["sArea"])) {
-                                while ($row = mysqli_fetch_array($res)) {
-                                    $param["sStoreName"] = htmlspecialchars($row[0]);
+                                while ($row = mysqli_fetch_array($res)):
+                                    $store = htmlspecialchars($row[0]);
                             ?>
-                                    <option value="<?php print $param["sAreaName"]; ?>"
-                                        <?php if ($param["sStoreName"] == $param["sStore"]) {
-                                            print ' selected="selected"';
-                                        } ?>><?php print $param["sStoreName"]; ?></option>
+                                    <option value="<?php print $store; ?>"
+                                        <?php print ($store == $param["sStore"]) ? 'selected' : ''; ?>>
+                                        <?php print $store; ?>
+                                    </option>
                             <?php
-                                }
+                                endwhile;
                             }
                             ?>
-
-
                         </select>
                     </td>
                 </tr>
@@ -132,6 +130,8 @@ function subStoreEditView($param)
     <h1>店舗<?php print $param["purpose"] ?></h1>
 
     <form name="form" id="form" action="index.php" method="post">
+        <?php //検索条件を保持するためにhiddenフィールドを使用 
+        ?>
         <input type="hidden" name="act" />
         <input type="hidden" name="sStore" value="<?php print $param["sStore"] ?>" />
         <input type="hidden" name="sArea" value="<?php print $param["sArea"] ?>" />
@@ -141,7 +141,11 @@ function subStoreEditView($param)
         <table border="0" cellpadding="5" cellspacing="1">
             <tr>
                 <th><span class="red">● </span>店舗名</th>
-                <td><input type="text" name="store" value="<?php print $param["store"] ?>" /></td>
+                <td>
+                    <input type="text" name="store" value="<?php print $param["store"] ?>" />
+                    <?php // ↓　ダミーのテキストフィールド
+                    ?><input type="text" name="dummy" style="display: none;" />
+                </td>
             </tr>
             <tr>
                 <th><span class="red">● </span>エリア</th>

@@ -34,10 +34,10 @@ function fnSqlStoreList($flg, $param)
 
     // 検索条件
     if ($param["sStore"]) {
-        $where .= " AND STORE LIKE '%" . $param["sStore"] . "%'";
+        $where .= " AND STORE = '" . $param["sStore"] . "'";
     }
     if ($param["sArea"]) {
-        $where .= " AND AREA LIKE '%" . $param["sArea"] . "%'";
+        $where .= " AND AREA  = '" . $param["sArea"] . "'";
     }
     if ($param["sNote"]) {
         $where .= " AND NOTE LIKE '%" . $param["sNote"] . "%'";
@@ -83,7 +83,7 @@ function fnSqlStoreInsert($param)
     $sql .= "STORENO,STORE,AREA,NOTE,INSDT,UPDT,DEL";
     $sql .= ")VALUES(";
     $sql .= "'" . $param["storeNo"] . "','" . $param["store"] . "','"
-        . $param["area"] . "'," . $param["note"] . "',"
+        . $param["area"] . "','" . $param["note"] . "',"
         . "CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1)";
 
     return $sql;

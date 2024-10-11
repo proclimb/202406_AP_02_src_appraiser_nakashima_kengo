@@ -49,11 +49,11 @@ function subStoreEdit()
         $param["btnImage"] = 'btn_enter.png';
     }
 
+    // エリアが選択されたときにフォームが送信され、値が変数に格納される
     if ($_REQUEST['area']) {
-
-        $param["store"]        = htmlspecialchars($_REQUEST['store']);
-        $param["area"]          = htmlspecialchars($_REQUEST['area']);
-        $param["note"]       = htmlspecialchars($_REQUEST['note']);
+        $param["store"]      = htmlspecialchars($_REQUEST['store']); // 選択された店舗名を取得
+        $param["area"]       = htmlspecialchars($_REQUEST['area']);  // 選択されたエリア名を取得
+        $param["note"]       = htmlspecialchars($_REQUEST['note']);  // 入力されたメモを取得
     }
 
     subMenu();
@@ -75,12 +75,12 @@ function subStoreEditComplete()
 
     if ($param["storeNo"]) {
         $sql = fnSqlStoreUpdate($param);
-        var_dump($sql);
+        //var_dump($sql);
         $res = mysqli_query($param["conn"], $sql);
     } else {
         $param["storeNo"] = fnNextNo('STORE');
         $sql = fnSqlStoreInsert($param);
-        var_dump($sql);
+        //var_dump($sql);
         $res = mysqli_query($param["conn"], $sql);
     }
 
