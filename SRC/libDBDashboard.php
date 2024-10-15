@@ -1,7 +1,5 @@
 <?php
-//
-//仕入上位5位（金額順）
-//
+
 function fnSqlStockAmountRank()
 {
     $sql = "SELECT COVER, SUM(DESKPRICE) AS AMOUNT, COUNT(*) AS COUNT
