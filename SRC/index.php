@@ -9,6 +9,10 @@ require('libAdminUser.php');
 require('libLoginout.php');
 require('libMenu.php');
 
+// ダッシュボード
+require('libDashboard.php');
+require('libDBDashboard.php');
+
 // 売主
 require('class/sell/control.php');
 
@@ -128,6 +132,11 @@ switch ($_REQUEST['act']) {
 
         case 'adminUserDelete':
             subAdminUserDelete();
+            break;
+
+            //ダッシュボード
+        case 'dashboard':
+            subDashboard();
             break;
 
             //店舗担当者
@@ -275,7 +284,7 @@ switch ($_REQUEST['act']) {
         case 'fTitleEditComplete':
         case 'fTitleDelete':
         case 'fTitleItemEdit':
-            Ftitle_control();
+            fTitle_control();
             break;
     }
     ?>

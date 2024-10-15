@@ -36,6 +36,15 @@ hr {
 	background: #ffffff;
 }
 
+.board_list {
+	border: 2px solid lightgray;
+	border-radius: 20px;
+	width: 20%;
+	margin: 30px;
+	padding: 20px;
+	display: inline-block;
+}
+
 div,
 p,
 form {
@@ -134,6 +143,11 @@ form {
 }
 
 #navi12 {
+	float: left;
+	width: 70px;
+}
+
+#navi13 {
 	float: left;
 	width: 70px;
 }

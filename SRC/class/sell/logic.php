@@ -109,7 +109,7 @@ function subSellCsvEdit()
         array_shift($data);
         //配列の最後の要素（空行や不要な行）を削除
         array_pop($data);
-        print_r($data);
+        //print_r($data);
     }
 
     //sellNoの最大値取得

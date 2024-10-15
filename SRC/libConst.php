@@ -100,6 +100,7 @@ function subConst()
 				<th class="list_head">鍵場所<?php fnOrder('KEYPLACE', 'constSearch') ?></th>
 				<th class="list_head">施工業者<?php fnOrder('CONSTTRADER', 'constSearch') ?></th>
 				<th class="list_head">内装見越額<?php fnOrder('INTERIORPRICE', 'constSearch') ?></th>
+				<th class="list_head">販売予定額<?php fnOrder('SELLPRICE', 'constSearch') ?></th>
 				<th class="list_head">工事金額<?php fnOrder('CONSTPRICE', 'constSearch') ?></th>
 				<th class="list_head">追加工事<?php fnOrder('CONSTADD', 'constSearch') ?></th>
 				<th class="list_head">買取決済<?php fnOrder('PURCHASEDT', 'constSearch') ?></th>
@@ -111,6 +112,7 @@ function subConst()
 				<th class="list_head">現調<?php fnOrder('SITEDT', 'constSearch') ?></th>
 				<th class="list_head">営業担当者<?php fnOrder('SELLCHARGE', 'constSearch') ?></th>
 				<th class="list_head">内装担当者<?php fnOrder('INTERIORCHARGE', 'constSearch') ?></th>
+
 			</tr>
 			<?php
 			$sql = fnSqlConstList(1, $sDel, $sArticle, $sConstTrader, $sConstFlg1, $sConstFlg2, $sConstFlg3, $sConstFlg4, $sInteriorCharge, $sPage, $orderBy, $orderTo);
@@ -138,6 +140,7 @@ function subConst()
 				$lineOpenContactDT = htmlspecialchars($row["LINEOPENCONTACTDT"]);
 				$lineCloseContactDT = htmlspecialchars($row["LINECLOSECONTACTDT"]);
 				$lightOrder     = htmlspecialchars($row["LIGHTORDER"]);
+				$sellPrice     = htmlspecialchars($row["SELLPRICE"]);
 			?>
 				<tr>
 					<td class="list_td<?php print $i ?>"><a href="javascript:form.act.value='constEdit';form.articleNo.value=<?php print $articleNo ?>;form.submit();"><?php print $article ?></a></td>
@@ -146,6 +149,7 @@ function subConst()
 					<td class="list_td<?php print $i ?>"><?php print $keyPlace ?></td>
 					<td class="list_td<?php print $i ?>"><?php print $constTrader ?></td>
 					<td class="list_td<?php print $i ?>" align="right"><?php print $interiorPrice ?></td>
+					<td class="list_td<?php print $i ?>" align="right"><?php print $sellPrice ?></td>
 					<td class="list_td<?php print $i ?>" align="right"><?php print $constPrice ?></td>
 					<td class="list_td<?php print $i ?>"><?php print $constAdd ?></td>
 					<td class="list_td<?php print $i ?>"><?php print $purchaseDT ?></td>
