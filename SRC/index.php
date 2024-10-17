@@ -97,6 +97,7 @@ switch ($_REQUEST['act']) {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script type="text/javascript" src="./js/common.js"></script>
     <script type="text/javascript" src="./js/jkl-calendar.js"></script>
 </head>

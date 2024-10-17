@@ -19,11 +19,20 @@ function subLogin()
 			<table border="0" cellpadding="2" cellspacing="0">
 				<tr>
 					<th>ユーザーID</th>
-					<td><input type="text" name="id" style="ime-mode:disabled;" /></td>
+					<td>
+						<div class="id_box">
+							<input type="text" name="id" style="ime-mode:disabled;" />
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<th>パスワード</th>
-					<td><input type="password" name="pw" /></td>
+					<td>
+						<div class="pass_box">
+							<input class="inp_pw" type="password" name="pw" id="pw" />
+							<i class="fa-solid fa-eye" id="eyeIcon"></i>
+						</div>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -32,8 +41,35 @@ function subLogin()
 			<a href="javascript:form.submit();"><img src="./images/btn_login.png"></a>
 		</div>
 	</form>
+	<script>
+		const pwInp = document.getElementById('pw');
+		const eyeIcon = document.getElementById('eyeIcon');
+		// 入力時にアイコンの表示を切り替え
+		pwInp.addEventListener('input', function() {
+			if (pwInp.value.length > 0) {
+				eyeIcon.style.display = 'inline-block';
+				pwInp.classList.remove("inp_pw");
+			} else {
+				eyeIcon.style.display = 'none';
+				pwInp.classList.add("inp_pw");
+			}
+		});
+		// アイコンをクリックして表示/伏字を切り替え
+		document.getElementById('eyeIcon').addEventListener('click', function() {
+			if (pwInp.type === 'password') {
+				pwInp.type = 'text';
+				eyeIcon.classList.remove("fa-eye");
+				eyeIcon.classList.add("fa-eye-slash");
+			} else {
+				pwInp.type = 'password';
+				eyeIcon.classList.remove("fa-eye-slash");
+				eyeIcon.classList.add("fa-eye");
+			}
+		});
+	</script>
 <?php
 }
+
 
 
 

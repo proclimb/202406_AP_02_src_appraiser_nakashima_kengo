@@ -214,3 +214,32 @@ form {
   overflow: hidden;
   /**/
 }
+
+.id_box input {
+	padding-right: 26px;
+	border-radius: 4px;
+	border: 1px solid #666666;
+}
+
+.pass_box input {
+	border-style: none;
+	border-radius: 4px;
+}
+
+.inp_pw {
+	padding-right: 26px;
+	border-bottom-left-radius: 4px;
+}
+
+.pass_box {
+	border: 1px solid #666666;
+	border-radius: 4px;
+	background-color: #FFFFFF;
+}
+
+.pass_box i {
+	position: relative;
+	cursor: pointer;
+	text-align: center;
+	display: none;
+}
