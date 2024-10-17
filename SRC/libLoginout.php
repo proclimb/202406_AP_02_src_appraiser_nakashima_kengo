@@ -2,7 +2,7 @@
 //
 //ログイン画面
 //
-function subLogin()
+function subLogin($errorMessage)
 {
 ?>
 
@@ -35,6 +35,9 @@ function subLogin()
 					</td>
 				</tr>
 			</table>
+			<?php if ($errorMessage): ?>
+				<div style="color: red;"><?php echo htmlspecialchars($errorMessage); ?></div>
+			<?php endif; ?>
 		</div>
 
 		<div class="login_btn">
@@ -88,12 +91,13 @@ function subLoginCheck()
 	$res = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_array($res);
 
-	if ($row[0] && password_verify($pw, $row['PASSWORD'])) {
+	if ($row[0] && password_verify($pw, $row['PASSWORD']) && $id === $row['ID']) {
 		$_COOKIE['cUserNo']   = $row[0];
 		$_COOKIE['authority'] = $row[1];
 		$_REQUEST['act']      = 'menu';
 	} else {
-		$_REQUEST['act']    = 'reLogin';
+		$_REQUEST['msg'] = "ログインに失敗しました。再度お試しください。";
+		$_REQUEST['act']  = 'reLogin';
 	}
 }
 ?>

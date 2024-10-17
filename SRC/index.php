@@ -110,7 +110,8 @@ switch ($_REQUEST['act']) {
             // ログイン
         case '':           //最初は$_REQUEST['act']の中身は空なのでここにくる
         case 'reLogin':
-            subLogin();    //subLogin()が実行される
+            $errorMessage = $_REQUEST['msg'];
+            subLogin($errorMessage);    //subLogin()が実行される
             break;
 
             // ログイン後のメニュー表示
